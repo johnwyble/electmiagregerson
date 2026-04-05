@@ -1295,6 +1295,7 @@
 
             const section = document.createElement('section');
             section.className = `hero ${heroLayout}`;
+            section.id = 'hero';
 
             if (heroLayout === 'centered' && hero.image) {
                 section.style.backgroundImage = `url('${hero.image}')`;
@@ -1356,6 +1357,7 @@
 
             const section = document.createElement('section');
             section.className = 'about reveal';
+            section.id = 'about';
 
             const container = document.createElement('div');
             container.className = 'container';
@@ -1443,6 +1445,7 @@
 
             const section = document.createElement('section');
             section.className = 'issues reveal';
+            section.id = 'issues';
 
             const container = document.createElement('div');
             container.className = 'container';
@@ -1516,6 +1519,7 @@
 
             const section = document.createElement('section');
             section.className = 'accomplishments reveal';
+            section.id = 'accomplishments';
 
             const container = document.createElement('div');
             container.className = 'container';
@@ -1608,6 +1612,7 @@
 
             const section = document.createElement('section');
             section.className = 'gallery reveal';
+            section.id = 'gallery';
 
             const container = document.createElement('div');
             container.className = 'container';
@@ -1664,6 +1669,7 @@
 
             const section = document.createElement('section');
             section.className = `endorsements ${style} reveal`;
+            section.id = 'endorsements';
 
             const container = document.createElement('div');
             container.className = 'container';
@@ -1838,6 +1844,7 @@
 
             const section = document.createElement('section');
             section.className = 'forms reveal';
+            section.id = 'volunteer';
 
             const container = document.createElement('div');
             container.className = 'container';
@@ -1952,6 +1959,7 @@
             if (forms.contact) {
                 const contactForm = document.createElement('div');
                 contactForm.className = 'form-section';
+                contactForm.id = 'contact';
 
                 const h3 = document.createElement('h3');
                 h3.textContent = forms.contact.title || 'Contact';
