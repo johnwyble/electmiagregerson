@@ -2060,16 +2060,36 @@
                 container.appendChild(column);
             }
 
-            // Address
-            if (footer.address) {
+            // Contact Info
+            if (footer.address || footer.email || footer.phone) {
                 const column = document.createElement('div');
                 column.className = 'footer-column';
                 const h4 = document.createElement('h4');
                 h4.textContent = 'Contact';
                 column.appendChild(h4);
-                const p = document.createElement('p');
-                p.textContent = footer.address;
-                column.appendChild(p);
+                if (footer.address) {
+                    const p = document.createElement('p');
+                    p.textContent = footer.address;
+                    column.appendChild(p);
+                }
+                if (footer.email) {
+                    const p = document.createElement('p');
+                    const a = document.createElement('a');
+                    a.href = 'mailto:' + footer.email;
+                    a.textContent = footer.email;
+                    a.style.color = 'inherit';
+                    p.appendChild(a);
+                    column.appendChild(p);
+                }
+                if (footer.phone) {
+                    const p = document.createElement('p');
+                    const a = document.createElement('a');
+                    a.href = 'tel:' + footer.phone.replace(/[^+\d]/g, '');
+                    a.textContent = footer.phone;
+                    a.style.color = 'inherit';
+                    p.appendChild(a);
+                    column.appendChild(p);
+                }
                 container.appendChild(column);
             }
 
