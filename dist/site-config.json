@@ -30,7 +30,7 @@
       { "label": "Contact", "href": "#contact" }
     ],
     "ctaText": "Donate",
-    "ctaLink": "#donate"
+    "ctaLink": "https://secure.anedot.com/miagregerson33/donate"
   },
   "sectionOrder": [
     "hero",
@@ -209,7 +209,7 @@
     }
   },
   "social": {
-    "facebook": "https://www.facebook.com/electmiagregerson",
+    "facebook": "https://www.facebook.com/mia.gregerson/",
     "instagram": "",
     "twitter": ""
   },
