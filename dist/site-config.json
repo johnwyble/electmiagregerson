@@ -1,0 +1,220 @@
+{
+  "site": {
+    "candidateName": "Mia Gregerson",
+    "office": "State Representative, 33rd District",
+    "tagline": "Experienced Leadership For South King County",
+    "metaDescription": "Re-Elect Mia Gregerson for State Representative. Experienced leadership for South King County — fighting for working families in SeaTac, Des Moines, Normandy Park, Kent, Burien, and Renton."
+  },
+  "style": {
+    "fontPairing": "fraunces-commissioner",
+    "heroLayout": "full-bleed",
+    "endorsementStyle": "quotes",
+    "colors": {
+      "primary": "#1a2744",
+      "secondary": "#2a7d6e",
+      "accent": "#d4a843",
+      "background": "#faf8f4",
+      "surface": "#f5f0e8",
+      "text": "#2c2c2c",
+      "textLight": "#555555",
+      "textMuted": "#777777"
+    }
+  },
+  "nav": {
+    "logoText": "Mia Gregerson",
+    "links": [
+      { "label": "About", "href": "#about" },
+      { "label": "Accomplishments", "href": "#accomplishments" },
+      { "label": "Community", "href": "#gallery" },
+      { "label": "Get Involved", "href": "#volunteer" },
+      { "label": "Contact", "href": "#contact" }
+    ],
+    "ctaText": "Donate",
+    "ctaLink": "#donate"
+  },
+  "sectionOrder": [
+    "hero",
+    "about",
+    "accomplishments",
+    "gallery",
+    "volunteer",
+    "contact"
+  ],
+  "hero": {
+    "image": "images/hero.jpg",
+    "headline": "Re-Elect Mia Gregerson For State Representative",
+    "subheadline": "Experienced Leadership For South King County",
+    "overlay": 0.55,
+    "ctaText": "Get Involved",
+    "ctaLink": "#volunteer"
+  },
+  "about": {
+    "sectionTitle": "About Mia",
+    "headline": "She Does This Work Because She Lives Here",
+    "body": "<p>Mia Gregerson grew up in South King County. Four generations of her family have called this place home. She knows what it looks like when a neighbor loses a job, when a kid shows up to school hungry, when a family can't afford to fix the one laptop their children share for homework.</p><p>She ran for office because she got tired of watching people in her community get overlooked by Olympia. The people making decisions didn't live with the consequences.</p><p>Mia has represented the 33rd Legislative District in the Washington State House since 2013. She serves as Vice-Chair of the House Appropriations Committee, where she helps write the state budget and fight for the funding that South King County families count on.</p><p>Before the legislature, Mia spent nearly 20 years working as a surgical assistant and business manager in the dental field. She served on the SeaTac City Council and as Mayor from 2008 to 2015. She was part of the team that passed the first $15 minimum wage in the nation, right in SeaTac, before the idea spread to Seattle and then across the country.</p><p>She attended Highline Community College and earned her degree in history from the University of Washington. She chairs the House Members of Color Caucus and uses that role to make sure the diverse communities of the 33rd District have a seat at the table when legislators write policy.</p>",
+    "photo": "images/516196437_10161605477668157_1351494932663584053_n.jpg",
+    "stats": [
+      { "number": "12+", "label": "Years in Office" },
+      { "number": "33rd", "label": "Legislative District" },
+      { "number": "$15", "label": "Minimum Wage Pioneer" },
+      { "number": "1st", "label": "Office of Equity" }
+    ]
+  },
+  "accomplishments": {
+    "sectionTitle": "What She's Done",
+    "headline": "Mia writes bills, gets them through committee, and puts them on the governor's desk.",
+    "intro": "Look at what she's accomplished for South King County and Washington State.",
+    "items": [
+      {
+        "title": "Right to Repair",
+        "icon": "🔧",
+        "body": "<p>If your phone screen cracked or your laptop died, you used to have two choices: pay the manufacturer's price or throw it away. Mia wrote the law that gave you a third option.</p><p>She sponsored the Fair Repair Act (HB 1483), which requires manufacturers to share the parts, tools, and repair information that consumers and independent repair shops need to fix electronics. The law bans \"parts pairing,\" a manufacturer trick that locks out third-party repairs. Governor Ferguson signed it in May 2025.</p><p>She started pushing right to repair legislation back in 2023. The bill passed the House that year, and she kept at it until it became law. Washington is now one of the leading states in the country on consumer repair rights.</p>",
+        "photo": "images/515512495_10161596049438157_5399358222615661025_n.jpg"
+      },
+      {
+        "title": "Food Security",
+        "icon": "🍎",
+        "body": "<p>Mia is one of the legislature's \"food fighters,\" a group of lawmakers who work together to make sure no one in Washington goes hungry.</p><p>In 2023, when pandemic-era SNAP benefits expired and families faced what advocates called a \"hunger cliff,\" Mia introduced HB 1784 to provide $28 million in emergency food assistance. The bill passed unanimously.</p><p>She also passed legislation to give kids free school meals statewide. Her earlier bills funded breakfast after the first bell (HB 1295, $2.7 million) and eliminated copays for reduced-price lunches (HB 2964), so no kid has to sit in class with an empty stomach because their family is a few dollars over the line.</p><p>She sponsored HB 1685 to create Washington's Food Policy Forum, bringing together people who grow food, distribute it, and eat it to address hunger, access to fresh food, and farmland preservation across the state.</p>",
+        "photo": "images/516073250_10161602458318157_1313893995102792648_n.jpg"
+      },
+      {
+        "title": "Education",
+        "icon": "📚",
+        "body": "<p>Mia fought to end the cap on special education funding that had been in place for more than a decade. The passage of SB 5263 means school districts across Washington will see more than $870 million in new funding over the next four years to support students with disabilities. Schools had been covering the gap out of their general funds, which meant less money for everyone.</p><p>She also passed HB 1365, which helps public school students and staff get the computers and digital devices they need, along with the training to use them. In a district like the 33rd, where many families share a single device, that's the difference between a kid who can do their homework and one who can't.</p>",
+        "photo": "images/516768274_10161603921038157_3774515900866616728_n.jpg"
+      },
+      {
+        "title": "Democracy Reform",
+        "icon": "🗳️",
+        "body": "<p>Mia was the prime sponsor of the Washington Voting Rights Act (HB 1800), modeled after California's law. It gives local governments the tools to fix elections where racial polarization shuts out communities of color. Governor Inslee signed it into law.</p><p>She sponsored HB 1078 to restore voting rights for people who have served their time, and she introduced the VOICES Act (HB 2250) to set statewide standards for ranked choice voting so local governments can implement it without starting from scratch.</p><p>Mia's position is simple: more people voting means better government.</p>",
+        "photo": "images/515441510_10161603921253157_5635391241649885839_n.jpg"
+      },
+      {
+        "title": "2026 Session Priorities",
+        "icon": "📋",
+        "body": "<p>The 2026 session is a budget year, and Mia's seat on Appropriations puts her at the center of the decisions that matter most for South King County.</p><p>She introduced HB 2489 to set a statewide standard on homelessness: local governments can't punish people for sleeping outside unless adequate shelter is available. It's a practical measure that prevents a patchwork of local rules from pushing people from one city to the next without solving anything.</p><p>She sponsored HB 1875 to protect workers' sick leave during immigration proceedings, and HB 2105 to require transparency during employer audits, so immigrant families aren't left in the dark about their rights at work.</p><p>In December 2025, Mia led the effort to extend Martin Luther King Jr. Way from Seattle through Renton and Kent, nearly 10 miles along SR 900 and SR 515. She brought the proposal to the Washington State Transportation Commission and they approved it unanimously. At a time when diversity and inclusion efforts face attacks from every direction, Mia put Dr. King's name on the road that runs through the heart of her district.</p><p>Mia secured funding for the 33rd District in the proposed budget, including $8 million for Kent's rapid ride bus facility, $20 million for the 224th corridor, $309,000 for the Para Los Ninos Community Facility, $258,000 for the Welcoming and Healing Center, and $4 million for the African Diaspora Cultural Anchor Village.</p><p>She's also working to protect Washington's climate and clean energy investments from federal rollbacks, defend free youth transit fares, and make sure the budget reflects the needs of working families in South King County, not just the wealthiest districts in the state.</p>",
+        "photo": "images/516854025_10161613963753157_8317807451909463633_n.jpg"
+      }
+    ]
+  },
+  "gallery": {
+    "sectionTitle": "In The Community",
+    "headline": "Mia shows up. Here's what that looks like.",
+    "photos": [
+      {
+        "src": "images/480336915_10161051610863157_9117485718889474177_n.jpg",
+        "alt": "Mia with a young visitor at the State Capitol",
+        "caption": "Showing a future voter around the Capitol"
+      },
+      {
+        "src": "images/514350955_10161582691348157_4062432538004968680_n.jpg",
+        "alt": "Community dinner event",
+        "caption": "Community dinner with supporters"
+      },
+      {
+        "src": "images/514724995_10161580477633157_6453134472432846229_n.jpg",
+        "alt": "Mia hiking at an alpine lake",
+        "caption": "Enjoying Washington's outdoors"
+      },
+      {
+        "src": "images/515041877_10161579356938157_8159256794568119459_n.jpg",
+        "alt": "Mia with community volunteers in matching shirts",
+        "caption": "With community volunteers"
+      },
+      {
+        "src": "images/515245102_10161581787558157_45760756135670167_n.jpg",
+        "alt": "Mia with a constituent at a community event",
+        "caption": "Connecting at a community event"
+      },
+      {
+        "src": "images/515406334_10161581118658157_6089084670237702409_n.jpg",
+        "alt": "Mia at a formal reception",
+        "caption": "At a community reception"
+      },
+      {
+        "src": "images/515513489_10161598878708157_2230529148447737366_n.jpg",
+        "alt": "Mia with an elderly community member",
+        "caption": "Every generation matters"
+      },
+      {
+        "src": "images/515718629_10161596254493157_6524097505075229778_n.jpg",
+        "alt": "Mia at a fire station with a firefighter",
+        "caption": "Visiting local first responders"
+      },
+      {
+        "src": "images/515933794_10161603170188157_7588224618507111023_n.jpg",
+        "alt": "Mia with SEIU member at a rally",
+        "caption": "Standing with working people"
+      },
+      {
+        "src": "images/516104806_10161597715688157_2532507920515752826_n.jpg",
+        "alt": "Mia hiking in the PNW forest",
+        "caption": "On the trail in the Pacific Northwest"
+      },
+      {
+        "src": "images/516244717_10161629649893157_6037951514845803093_n.jpg",
+        "alt": "Mia at a diplomatic meeting",
+        "caption": "Building international relationships"
+      },
+      {
+        "src": "images/516392059_10161606748143157_4530044851828774787_n.jpg",
+        "alt": "Mia at the beach with a friend",
+        "caption": "Taking a break at the coast"
+      },
+      {
+        "src": "images/516503527_10161605464573157_3198626582799973473_n.jpg",
+        "alt": "Mia with a friend",
+        "caption": "With friends in the community"
+      },
+      {
+        "src": "images/516765393_10161600954133157_8017147825012658302_n.jpg",
+        "alt": "Mia at a park with community members",
+        "caption": "Community day at the park"
+      },
+      {
+        "src": "images/516785154_10161609432008157_5360485149719723806_n.jpg",
+        "alt": "Mia at a celebration with party hats",
+        "caption": "Celebrating with the community"
+      },
+      {
+        "src": "images/516787899_10161615470788157_5706942591707932865_n.jpg",
+        "alt": "Mia at a garden event",
+        "caption": "Out in the neighborhood"
+      },
+      {
+        "src": "images/517485928_10161613210513157_6006109456155074484_n.jpg",
+        "alt": "Mia at the TSMC Museum of Innovation in Taiwan",
+        "caption": "International trade visit to Taiwan"
+      },
+      {
+        "src": "images/518390341_10161697218608157_5632599189019329330_n.jpg",
+        "alt": "Mia with a friend",
+        "caption": "On the road"
+      },
+      {
+        "src": "images/654863285_10162688118038157_1907002586140416978_n.jpg",
+        "alt": "Mia with family",
+        "caption": "Family is everything"
+      }
+    ]
+  },
+  "forms": {
+    "volunteer": {
+      "title": "Get Involved",
+      "description": "Mia's campaign runs on people, not PAC money. If you can knock doors, make calls, or put up a yard sign, we need you."
+    },
+    "contact": {
+      "title": "Contact The Campaign",
+      "description": "Have a question or want to share something with Mia? We read every message."
+    }
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/electmiagregerson",
+    "instagram": "",
+    "twitter": ""
+  },
+  "footer": {
+    "paid_for": "Paid for by Friends of Mia Gregerson",
+    "address": "P.O. Box 33, SeaTac, WA 98148"
+  }
+}
