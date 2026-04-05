@@ -262,19 +262,19 @@
 
         /* Hero: Full Bleed */
         .hero.full-bleed {
-            min-height: 600px;
+            min-height: 85vh;
             background-size: cover;
-            background-position: center;
+            background-position: center top;
             display: flex;
             align-items: flex-end;
-            padding: var(--spacing-2xl);
+            padding: 0;
         }
 
         .hero.full-bleed::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.7) 100%);
             z-index: 1;
         }
 
@@ -283,7 +283,9 @@
             z-index: 2;
             color: white;
             text-align: left;
-            max-width: 600px;
+            max-width: 700px;
+            padding: var(--spacing-2xl) var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
         }
 
         /* Hero: Split Left */
