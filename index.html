@@ -927,13 +927,13 @@
         /* Scroll Reveal */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
         /* Responsive */
@@ -1074,6 +1074,19 @@
     <main id="main"></main>
 
     <footer id="footer"></footer>
+
+    <!-- Hidden forms for Netlify bot detection -->
+    <form name="volunteer" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="name">
+        <input type="email" name="email">
+        <input type="tel" name="phone">
+        <textarea name="message"></textarea>
+    </form>
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="name">
+        <input type="email" name="email">
+        <textarea name="message"></textarea>
+    </form>
 
     <div class="lightbox" id="lightbox">
         <div class="lightbox-content">
@@ -1483,7 +1496,7 @@
 
             (issues.items || []).forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'issue-card reveal';
+                card.className = 'issue-card';
 
                 if (item.icon) {
                     const icon = document.createElement('div');
@@ -1557,7 +1570,7 @@
 
             (accomplishments.items || []).forEach(item => {
                 const itemDiv = document.createElement('div');
-                itemDiv.className = 'accomplishment-item reveal';
+                itemDiv.className = 'accomplishment-item';
 
                 const content = document.createElement('div');
                 content.className = 'accomplishment-content';
@@ -1701,7 +1714,7 @@
             (endorsements.items || []).forEach(item => {
                 if (style === 'cards') {
                     const card = document.createElement('div');
-                    card.className = 'endorsement-card reveal';
+                    card.className = 'endorsement-card';
 
                     if (item.photo) {
                         const photo = document.createElement('div');
@@ -1737,7 +1750,7 @@
                     grid.appendChild(card);
                 } else if (style === 'quotes') {
                     const quote = document.createElement('div');
-                    quote.className = 'endorsement-quote reveal';
+                    quote.className = 'endorsement-quote';
 
                     if (item.quote) {
                         const quoteText = document.createElement('div');
@@ -1763,7 +1776,7 @@
                     grid.appendChild(quote);
                 } else if (style === 'grid') {
                     const gridItem = document.createElement('div');
-                    gridItem.className = 'endorsement-grid-item reveal';
+                    gridItem.className = 'endorsement-grid-item';
 
                     if (item.photo) {
                         const photo = document.createElement('div');
@@ -1792,7 +1805,7 @@
                     grid.appendChild(gridItem);
                 } else if (style === 'list') {
                     const listItem = document.createElement('div');
-                    listItem.className = 'endorsement-list-item reveal';
+                    listItem.className = 'endorsement-list-item';
 
                     if (item.photo) {
                         const photo = document.createElement('div');
@@ -1882,8 +1895,13 @@
                 const form = document.createElement('form');
                 form.name = 'volunteer';
                 form.method = 'POST';
-                form.action = '/' // Netlify form
-                form.netlify = true;
+                form.action = '/';
+                form.setAttribute('data-netlify', 'true');
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'form-name';
+                hiddenInput.value = 'volunteer';
+                form.appendChild(hiddenInput);
 
                 const nameGroup = document.createElement('div');
                 nameGroup.className = 'form-group';
@@ -1974,8 +1992,13 @@
                 const form = document.createElement('form');
                 form.name = 'contact';
                 form.method = 'POST';
-                form.action = '/' // Netlify form
-                form.netlify = true;
+                form.action = '/';
+                form.setAttribute('data-netlify', 'true');
+                const hiddenInput2 = document.createElement('input');
+                hiddenInput2.type = 'hidden';
+                hiddenInput2.name = 'form-name';
+                hiddenInput2.value = 'contact';
+                form.appendChild(hiddenInput2);
 
                 const nameGroup = document.createElement('div');
                 nameGroup.className = 'form-group';
@@ -2180,13 +2203,14 @@
             });
 
             // Scroll Reveal
-            const observer = new IntersectionObserver((entries) => {
+            const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
+                        obs.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.05 });
 
             document.querySelectorAll('.reveal').forEach(el => {
                 observer.observe(el);
