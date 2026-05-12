@@ -37,8 +37,8 @@
     "hero",
     "about",
     "accomplishments",
-    "gallery",
     "endorsements",
+    "gallery",
     "volunteer",
     "contact"
   ],
@@ -210,7 +210,14 @@
         "items": [
           { "name": "Adam Smith", "title": "U.S. Congressman" },
           { "name": "Bob Ferguson", "title": "Governor" },
+          { "name": "Rebecca Saldana", "title": "37th District State Senator" },
           { "name": "Tina Orwall", "title": "State Senator" },
+          { "name": "Lilian Ortiz-Self", "title": "21st District State Representative" },
+          { "name": "Lisa Parshley", "title": "22nd District State Representative" },
+          { "name": "Emily Alvarado", "title": "34th District State Representative" },
+          { "name": "Jamila Taylor", "title": "State Representative" },
+          { "name": "Sharlett Mena", "title": "29th District State Representative" },
+          { "name": "Kristine Reeves", "title": "30th District State Representative" },
           { "name": "Edwin Obras", "title": "State Representative" }
         ]
       },
@@ -244,16 +251,9 @@
         "label": "Elected Leaders",
         "icon": "⭐",
         "items": [
-          { "name": "Teresa Mosqueda", "title": "King County Executive" },
-          { "name": "Jorge Baron", "title": "Elected Official" },
-          { "name": "Lilian Ortiz-Self", "title": "Elected Official" },
-          { "name": "Dr. Lisa Parshley", "title": "Elected Official" },
-          { "name": "Emily Alverado", "title": "Elected Official" },
-          { "name": "Rebecca Saldana", "title": "Elected Official" },
-          { "name": "Jamila Taylor", "title": "Elected Official" },
-          { "name": "Hamdi Mohamed", "title": "Elected Official" },
-          { "name": "Sharlet Mena", "title": "Elected Official" },
-          { "name": "Kristine Reeves", "title": "Elected Official" }
+          { "name": "Teresa Mosqueda", "title": "King County Councilmember" },
+          { "name": "Jorge Baron", "title": "King County Councilmember" },
+          { "name": "Hamdi Mohamed", "title": "Port of Seattle Commissioner" }
         ]
       },
       {
@@ -273,7 +273,6 @@
         "icon": "🏢",
         "type": "org",
         "items": [
-          { "name": "Progressive Voters Guide" },
           { "name": "Moms Demand Action", "title": "Gun Sense Candidate" },
           { "name": "UFCW 3000" },
           { "name": "National Women's Political Caucus" },
