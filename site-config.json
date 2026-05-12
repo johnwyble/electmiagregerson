@@ -8,7 +8,7 @@
   "style": {
     "fontPairing": "fraunces-commissioner",
     "heroLayout": "full-bleed",
-    "endorsementStyle": "quotes",
+    "endorsementStyle": "grid",
     "colors": {
       "primary": "#1a2744",
       "secondary": "#2a7d6e",
@@ -26,6 +26,7 @@
       { "label": "About", "href": "#about" },
       { "label": "Accomplishments", "href": "#accomplishments" },
       { "label": "Community", "href": "#gallery" },
+      { "label": "Endorsements", "href": "#endorsements" },
       { "label": "Get Involved", "href": "#volunteer" },
       { "label": "Contact", "href": "#contact" }
     ],
@@ -37,6 +38,7 @@
     "about",
     "accomplishments",
     "gallery",
+    "endorsements",
     "volunteer",
     "contact"
   ],
@@ -196,6 +198,47 @@
         "alt": "Mia with family",
         "caption": "Family is everything"
       }
+    ]
+  },
+  "endorsements": {
+    "sectionTitle": "Endorsements",
+    "headline": "Who Stands With Mia",
+    "items": [
+      { "name": "Adam Smith", "title": "U.S. Congressman" },
+      { "name": "Bob Ferguson", "title": "Governor" },
+      { "name": "Tina Orwall", "title": "State Senator" },
+      { "name": "Edwin Obras", "title": "State Representative" },
+      { "name": "Sarah Moore", "title": "Mayor, Des Moines" },
+      { "name": "Hugo Garcia", "title": "Deputy Mayor, Des Moines" },
+      { "name": "Rocco DeVito", "title": "Councilmember, Des Moines" },
+      { "name": "Mohamed Egal", "title": "Mayor, SeaTac" },
+      { "name": "Senayet Negusse", "title": "Deputy Mayor, SeaTac" },
+      { "name": "James Lovell", "title": "Councilmember, SeaTac" },
+      { "name": "John Boyd", "title": "Councilmember, Kent" },
+      { "name": "Sharn Kaur", "title": "Councilmember, Kent" },
+      { "name": "Teresa Mosqueda", "title": "King County Executive" },
+      { "name": "Jorge Baron", "title": "Elected Official" },
+      { "name": "Lilian Ortiz-Self", "title": "Elected Official" },
+      { "name": "Dr. Lisa Parshley", "title": "Elected Official" },
+      { "name": "Emily Alverado", "title": "Elected Official" },
+      { "name": "Rebecca Saldana", "title": "Elected Official" },
+      { "name": "Jamila Taylor", "title": "Elected Official" },
+      { "name": "Hamdi Mohamed", "title": "Elected Official" },
+      { "name": "Sharlet Mena", "title": "Elected Official" },
+      { "name": "Kristine Reeves", "title": "Elected Official" },
+      { "name": "De'Sean Quinn", "title": "Community Leader" },
+      { "name": "Gabriella Quintara", "title": "Community Leader" },
+      { "name": "Maurico Ayon", "title": "Community Leader" },
+      { "name": "Rick Harwood", "title": "Community Leader" },
+      { "name": "Estela Ortega", "title": "Community Leader" },
+      { "name": "Maria Sequinza", "title": "Community Leader" },
+      { "name": "Progressive Voters Guide", "title": "Organization" },
+      { "name": "Moms Demand Action", "title": "Gun Sense Candidate" },
+      { "name": "UFCW 3000", "title": "Organization" },
+      { "name": "National Women's Political Caucus", "title": "Organization" },
+      { "name": "Washington Housing Alliance Action Fund", "title": "Organization" },
+      { "name": "Washington Federation of State Employees", "title": "Organization" },
+      { "name": "One America Votes", "title": "Organization" }
     ]
   },
   "forms": {
