@@ -682,6 +682,98 @@
             object-fit: cover;
         }
 
+        /* Endorsements: Grouped */
+        .endorsements.grouped .endorsement-category {
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .endorsements.grouped .category-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--color-accent);
+        }
+
+        .endorsements.grouped .category-icon {
+            font-size: 1.75rem;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-primary);
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .endorsements.grouped .category-name {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .endorsements.grouped .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .endorsements.grouped .endorsement-grouped-item {
+            background: var(--color-surface);
+            border-radius: 8px;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-left: 3px solid var(--color-secondary);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .endorsements.grouped .endorsement-grouped-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .endorsements.grouped .endorsement-grouped-item .name {
+            font-weight: 700;
+            color: var(--color-text);
+            font-size: 1rem;
+        }
+
+        .endorsements.grouped .endorsement-grouped-item .title {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-top: 2px;
+        }
+
+        .endorsements.grouped .category-grid.orgs {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+
+        .endorsements.grouped .endorsement-grouped-item.org-item {
+            border-left-color: var(--color-accent);
+            text-align: center;
+            border-left: none;
+            border-bottom: 3px solid var(--color-accent);
+        }
+
+        .endorsements.grouped .endorsement-grouped-item.org-item .name {
+            font-size: 1.05rem;
+        }
+
+        .endorsements.grouped .endorsement-grouped-item.org-item .title {
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .endorsements.grouped .category-grid {
+                grid-template-columns: 1fr;
+            }
+            .endorsements.grouped .category-grid.orgs {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Endorsements: List */
         .endorsements.list .endorsements-grid {
             display: flex;
@@ -1711,8 +1803,61 @@
             const grid = document.createElement('div');
             grid.className = 'endorsements-grid';
 
+            if (style === 'grouped' && endorsements.categories) {
+                endorsements.categories.forEach(cat => {
+                    const catDiv = document.createElement('div');
+                    catDiv.className = 'endorsement-category';
+
+                    const catHeader = document.createElement('div');
+                    catHeader.className = 'category-header';
+
+                    if (cat.icon) {
+                        const iconDiv = document.createElement('div');
+                        iconDiv.className = 'category-icon';
+                        iconDiv.textContent = cat.icon;
+                        catHeader.appendChild(iconDiv);
+                    }
+
+                    const catName = document.createElement('div');
+                    catName.className = 'category-name';
+                    catName.textContent = cat.label;
+                    catHeader.appendChild(catName);
+
+                    catDiv.appendChild(catHeader);
+
+                    const catGrid = document.createElement('div');
+                    catGrid.className = 'category-grid' + (cat.type === 'org' ? ' orgs' : '');
+
+                    (cat.items || []).forEach(item => {
+                        const el = document.createElement('div');
+                        el.className = 'endorsement-grouped-item' + (cat.type === 'org' ? ' org-item' : '');
+
+                        if (item.name) {
+                            const name = document.createElement('div');
+                            name.className = 'name';
+                            name.textContent = item.name;
+                            el.appendChild(name);
+                        }
+
+                        if (item.title) {
+                            const title = document.createElement('div');
+                            title.className = 'title';
+                            title.textContent = item.title;
+                            el.appendChild(title);
+                        }
+
+                        catGrid.appendChild(el);
+                    });
+
+                    catDiv.appendChild(catGrid);
+                    grid.appendChild(catDiv);
+                });
+            }
+
             (endorsements.items || []).forEach(item => {
-                if (style === 'cards') {
+                if (style === 'grouped') {
+                    // handled above via categories
+                } else if (style === 'cards') {
                     const card = document.createElement('div');
                     card.className = 'endorsement-card';
 
