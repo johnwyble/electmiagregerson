@@ -244,7 +244,8 @@
         "icon": "🏘️",
         "items": [
           { "name": "John Boyd", "title": "Councilmember" },
-          { "name": "Sharn Kaur", "title": "Councilmember" }
+          { "name": "Sharn Kaur", "title": "Councilmember" },
+          { "name": "Brenda Fincher", "title": "Former Councilmember" }
         ]
       },
       {
@@ -291,7 +292,12 @@
           { "name": "Washington State Labor Council" },
           { "name": "Women of Color in Politics" },
           { "name": "Washington Conservation Action" },
-          { "name": "Planned Parenthood Alliance Advocates" }
+          { "name": "Planned Parenthood Alliance Advocates" },
+          { "name": "IBEW Local 77" },
+          { "name": "Washington Affordable Housing Council" },
+          { "name": "The Urbanist" },
+          { "name": "Master Builders Association" },
+          { "name": "International Longshore and Warehouse Union" }
         ]
       }
     ]
