@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Mia Yard Sign Map — Volunteer Check-Off</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<style>
+  :root{
+    --blue:#0a4b8c;       /* Mia campaign blue */
+    --blue-dark:#073a6e;
+    --green:#1e8e4e;      /* placed */
+    --amber:#e08a00;      /* place multiple */
+    --ink:#1b2733;
+    --muted:#5b6b7a;
+    --line:#e3e8ee;
+    --bg:#f5f7fa;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--bg);
+  }
+  .app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+  header{
+    background:var(--blue);color:#fff;padding:10px 16px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;box-shadow:0 2px 6px rgba(0,0,0,.15);z-index:1200
+  }
+  header h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.2px}
+  header .sub{font-size:12px;opacity:.85;margin:0}
+  .progress-wrap{margin-left:auto;display:flex;align-items:center;gap:10px;min-width:220px}
+  .progress-track{flex:1;height:10px;background:rgba(255,255,255,.28);border-radius:6px;overflow:hidden;min-width:120px}
+  .progress-fill{height:100%;width:0;background:#fff;transition:width .35s ease}
+  .progress-label{font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .status-pill{font-size:11px;padding:3px 9px;border-radius:20px;background:rgba(255,255,255,.18);white-space:nowrap}
+  .status-pill.live{background:#1e8e4e}
+  .status-pill.local{background:#e08a00}
+
+  .main{flex:1;display:flex;min-height:0}
+  #map{flex:1;min-width:0;height:100%}
+  .panel{
+    width:340px;max-width:42vw;background:#fff;border-left:1px solid var(--line);
+    display:flex;flex-direction:column;min-height:0
+  }
+  .panel .search{padding:10px;border-bottom:1px solid var(--line)}
+  .panel .search input{
+    width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font-size:14px;outline:none
+  }
+  .panel .search input:focus{border-color:var(--blue)}
+  .filters{display:flex;gap:6px;padding:8px 10px 0;flex-wrap:wrap}
+  .chip{font-size:12px;padding:5px 10px;border-radius:16px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--muted)}
+  .chip.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .list{flex:1;overflow:auto;padding:6px 6px 14px}
+  .item{
+    display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:10px;cursor:pointer;border:1px solid transparent
+  }
+  .item:hover{background:#f0f4f9}
+  .item.placed .name{color:var(--muted);text-decoration:line-through}
+  .item .cb{
+    flex:none;width:22px;height:22px;border-radius:6px;border:2px solid var(--blue);
+    display:flex;align-items:center;justify-content:center;margin-top:1px;transition:.15s
+  }
+  .item.placed .cb{background:var(--green);border-color:var(--green)}
+  .item .cb svg{width:14px;height:14px;stroke:#fff;stroke-width:3;fill:none;opacity:0}
+  .item.placed .cb svg{opacity:1}
+  .item .body{min-width:0}
+  .item .name{font-size:14px;font-weight:600;line-height:1.25}
+  .item .meta{font-size:12px;color:var(--amber);margin-top:2px}
+  .item .meta.placed-by{color:var(--muted)}
+  .empty{padding:24px;text-align:center;color:var(--muted);font-size:13px}
+
+  /* map markers */
+  .pin{border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4);width:100%;height:100%}
+  .pin.need{background:var(--blue)}
+  .pin.placed{background:var(--green)}
+  .pin.multi{background:var(--amber)}
+  .popup-name{font-size:14px;font-weight:700;margin:0 0 4px}
+  .popup-note{font-size:12px;color:var(--amber);margin:0 0 8px}
+  .popup-btn{
+    display:inline-flex;align-items:center;gap:7px;border:0;border-radius:8px;padding:8px 12px;
+    font-size:13px;font-weight:600;color:#fff;background:var(--green);cursor:pointer;width:100%;justify-content:center
+  }
+  .popup-btn.undo{background:#8795a1}
+  .leaflet-popup-content{margin:12px 14px}
+
+  .mobile-toggle{display:none}
+  @media (max-width:760px){
+    .panel{position:fixed;top:0;right:0;bottom:0;width:88%;max-width:none;transform:translateX(100%);transition:transform .28s ease;z-index:1500;box-shadow:-4px 0 18px rgba(0,0,0,.2)}
+    .panel.open{transform:translateX(0)}
+    .mobile-toggle{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--blue);border:0;border-radius:8px;padding:7px 11px;font-size:13px;font-weight:700;cursor:pointer}
+    .progress-wrap{min-width:0;order:3;width:100%}
+    header h1{font-size:15px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div>
+      <h1>Mia Yard Sign Map</h1>
+      <p class="sub">Tap a spot when your sign is up. Green = done.</p>
+    </div>
+    <div class="progress-wrap">
+      <span class="status-pill" id="statusPill">Connecting…</span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-label" id="progressLabel">0 / 0</span>
+      <button class="mobile-toggle" id="mobileToggle">List ▸</button>
+    </div>
+  </header>
+  <div class="main">
+    <div id="map"></div>
+    <aside class="panel" id="panel">
+      <div class="search"><input id="search" type="search" placeholder="Search a corner or street…" /></div>
+      <div class="filters">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="need">Needs sign</button>
+        <button class="chip" data-filter="placed">Placed</button>
+      </div>
+      <div class="list" id="list"></div>
+    </aside>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<!-- ============================================================= -->
+<!--  FIREBASE (real-time shared check-offs).                      -->
+<!--  Until you paste your project config below, the page runs in  -->
+<!--  LOCAL mode (checks saved only on this device). See setup      -->
+<!--  instructions that came with this file.                       -->
+<!-- ============================================================= -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+/* ---- 1. PASTE YOUR FIREBASE CONFIG HERE -------------------------- */
+const FIREBASE_CONFIG = {
+  apiKey: "PASTE_API_KEY",
+  authDomain: "PASTE_PROJECT.firebaseapp.com",
+  projectId: "PASTE_PROJECT_ID"
+};
+/* ------------------------------------------------------------------ */
+
+/* ---- 2. Sign locations (from the Google map) --------------------- */
+const LOCATIONS = [
+  {n:"160th and 19th", lat:47.4595953, lng:-122.357901},
+  {n:"Ambaum and 152nd", lat:47.4666766, lng:-122.3447799},
+  {n:"Any planter box along 152nd", lat:47.4667296, lng:-122.3404334, note:"Place multiple up and down 152nd in the planter boxes", multi:true},
+  {n:"152nd and 4th", lat:47.4667368, lng:-122.3393176},
+  {n:"148th and 4th NE corner in the fence", lat:47.4705507, lng:-122.3387319},
+  {n:"148th and Ambaum", lat:47.4704975, lng:-122.3468069},
+  {n:"Ambaum and 144th", lat:47.4740145, lng:-122.3472708},
+  {n:"160th and 8th", lat:47.4599037, lng:-122.3447027},
+  {n:"Sylvester and 160th", lat:47.4596323, lng:-122.3389493},
+  {n:"160th and 1st", lat:47.4595672, lng:-122.3336446},
+  {n:"156th and Des Moines Memorial Dr", lat:47.4631611, lng:-122.3232798},
+  {n:"136th and Des Moines Memorial", lat:47.4815067, lng:-122.3142681},
+  {n:"128th and Des Moines Memorial SOUTH SIDE ONLY", lat:47.48855, lng:-122.3117534},
+  {n:"8th and 200th", lat:47.4232458, lng:-122.3250879},
+  {n:"Des Moines Memorial and 200th", lat:47.4232168, lng:-122.3195947},
+  {n:"26th and 200th", lat:47.4227854, lng:-122.2998076},
+  {n:"Anywhere in the median of International", lat:47.4275427, lng:-122.2957407, note:"Place multiple", multi:true},
+  {n:"Military and 200th facing the freeway exit", lat:47.4226053, lng:-122.2875401},
+  {n:"Military and 188th", lat:47.4331523, lng:-122.2733394},
+  {n:"Anywhere on Military", lat:47.428115, lng:-122.2782811, note:"Place multiple", multi:true},
+  {n:"182nd and 42nd", lat:47.4396857, lng:-122.2813928},
+  {n:"Military and 182nd", lat:47.4398007, lng:-122.2716929},
+  {n:"Military and 176th", lat:47.4453088, lng:-122.2750059},
+  {n:"Military and 164th", lat:47.4563075, lng:-122.2811857},
+  {n:"Military and 170th", lat:47.4512873, lng:-122.278525},
+  {n:"Edwin's house", lat:47.4535172, lng:-122.2734511},
+  {n:"200th and trailhead", lat:47.4229373, lng:-122.3058964},
+  {n:"Des Moines Memorial and 216th", lat:47.4086656, lng:-122.32686},
+  {n:"216th and Marine View", lat:47.4075038, lng:-122.3248613},
+  {n:"Planters along Marine View", lat:47.4053613, lng:-122.3246038, note:"Place multiple", multi:true},
+  {n:"6th and 223rd", lat:47.401774, lng:-122.3273532},
+  {n:"Marine View and 223rd", lat:47.4019293, lng:-122.3243706},
+  {n:"227th and Marine View", lat:47.3980823, lng:-122.3241024},
+  {n:"240th and Marine View", lat:47.3869955, lng:-122.3232477},
+  {n:"Marine View and 251st", lat:47.3772614, lng:-122.3225926},
+  {n:"250th and 16th", lat:47.3780528, lng:-122.3138045},
+  {n:"16th and 240th", lat:47.3864671, lng:-122.3133539},
+  {n:"20th and 240ths", lat:47.3867671, lng:-122.3076338},
+  {n:"Across from Parking lot exits at Highline", lat:47.3865201, lng:-122.3031468},
+  {n:"International and 240th", lat:47.3866508, lng:-122.2967095},
+  {n:"Kent Des Moines Rd and 16th", lat:47.3918178, lng:-122.311639},
+  {n:"Marine View Dr and Kent Des Moines Rd", lat:47.3968925, lng:-122.3237123},
+  {n:"20th and Kent Des Moines", lat:47.3908257, lng:-122.3077546},
+  {n:"PAC hwy and Kent Des Moines", lat:47.3937038, lng:-122.2950844, note:"Place multiple", multi:true},
+  {n:"216th and International", lat:47.408238, lng:-122.2977025},
+  {n:"24th and 216th", lat:47.4080928, lng:-122.302552},
+  {n:"Median on International", lat:47.4118683, lng:-122.2975309, note:"Place multiple", multi:true},
+  {n:"37th and 188th", lat:47.4342538, lng:-122.2869635},
+  {n:"38th and 176th", lat:47.4450728, lng:-122.2860188},
+  {n:"170th and 40th", lat:47.45111, lng:-122.2834207},
+  {n:"11th and 220th", lat:47.4047759, lng:-122.3198827},
+  {n:"6th and 227th", lat:47.3980369, lng:-122.327003},
+  {n:"188th East of the tunnel", lat:47.4342411, lng:-122.3014967},
+  {n:"Des Moines and 188th", lat:47.4362441, lng:-122.3182336},
+  {n:"192nd and Des Moines Memorial", lat:47.4310623, lng:-122.3179976},
+  {n:"8th and Des Moines Memorial", lat:47.4313477, lng:-122.3247821},
+  {n:"208th and Des Moines Memorial", lat:47.4158994, lng:-122.3204367},
+  {n:"8th and 208th", lat:47.4158704, lng:-122.3240845},
+  {n:"8th and 188th", lat:47.4397104, lng:-122.3244302},
+  {n:"Normandy Rd and Ambaum", lat:47.4431862, lng:-122.3293377},
+  {n:"156th and Ambaum", lat:47.46321, lng:-122.3379437},
+  {n:"4th and Ambaim", lat:47.4631176, lng:-122.3393792},
+  {n:"Ambaum and 154th", lat:47.4650841, lng:-122.3439559},
+  {n:"154th and 4th", lat:47.4653162, lng:-122.3395712},
+  {n:"Outside Kevin Schilling's house", lat:47.4631375, lng:-122.349773},
+  {n:"152nd and 8th", lat:47.4667654, lng:-122.3232245},
+  {n:"160th and Des Moines", lat:47.4593319, lng:-122.3246699},
+  {n:"146th and 8th", lat:47.4724717, lng:-122.3233806},
+  {n:"144th and Des Moines", lat:47.4739221, lng:-122.3150121},
+  {n:"8th and 136th", lat:47.4811445, lng:-122.3229514}
+];
+LOCATIONS.forEach((l,i)=>{ l.id = "loc-"+i; });
+
+/* ---- 3. Storage layer: Firestore if configured, else localStorage - */
+let backend = "local";
+let db = null;
+const placed = {};        // id -> true
+const markers = {};       // id -> Leaflet marker
+
+function usingFirebase(){
+  return FIREBASE_CONFIG.apiKey && !FIREBASE_CONFIG.apiKey.startsWith("PASTE");
+}
+
+function setStatus(){
+  const pill = document.getElementById("statusPill");
+  if(backend === "firebase"){ pill.textContent="Live · shared"; pill.className="status-pill live"; }
+  else { pill.textContent="Local only (this device)"; pill.className="status-pill local"; }
+}
+
+/* localStorage helpers */
+const LS_KEY = "miaYardSigns.v1";
+function loadLocal(){
+  try{ Object.assign(placed, JSON.parse(localStorage.getItem(LS_KEY)||"{}")); }catch(e){}
+}
+function saveLocal(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(placed)); }catch(e){}
+}
+
+/* toggle a location's placed state */
+function toggle(id){
+  const now = !placed[id];
+  if(now) placed[id]=true; else delete placed[id];
+  if(backend === "firebase"){
+    db.collection("signs").doc(id).set({placed: now});   // onSnapshot will re-render
+  } else {
+    saveLocal(); render();
+  }
+}
+
+/* ---- 4. Map ------------------------------------------------------- */
+const map = L.map("map",{zoomControl:true});
+L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",{
+  maxZoom:20, attribution:'&copy; OpenStreetMap &copy; CARTO'
+}).addTo(map);
+
+const bounds = L.latLngBounds(LOCATIONS.map(l=>[l.lat,l.lng]));
+map.fitBounds(bounds,{padding:[40,40]});
+
+function iconFor(loc){
+  const cls = placed[loc.id] ? "placed" : (loc.multi ? "multi" : "need");
+  return L.divIcon({className:"", html:`<div class="pin ${cls}"></div>`, iconSize:[18,18], iconAnchor:[9,9]});
+}
+
+function popupHtml(loc){
+  const done = placed[loc.id];
+  return `<p class="popup-name">${escapeHtml(loc.n)}</p>`
+    + (loc.note ? `<p class="popup-note">${escapeHtml(loc.note)}</p>`:``)
+    + `<button class="popup-btn ${done?'undo':''}" data-toggle="${loc.id}">`
+    + (done ? "↩︎ Mark not placed" : "✓ Mark sign placed") + `</button>`;
+}
+
+LOCATIONS.forEach(loc=>{
+  const m = L.marker([loc.lat,loc.lng],{icon:iconFor(loc)}).addTo(map);
+  m.bindPopup(popupHtml(loc));
+  markers[loc.id]=m;
+});
+
+/* delegate popup button clicks */
+map.on("popupopen", e=>{
+  const btn = e.popup.getElement().querySelector("[data-toggle]");
+  if(btn) btn.addEventListener("click", ()=>{ toggle(btn.dataset.toggle); map.closePopup(); });
+});
+
+/* ---- 5. Sidebar list + rendering --------------------------------- */
+let filter = "all", query = "";
+const listEl = document.getElementById("list");
+
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+function render(){
+  // markers
+  LOCATIONS.forEach(loc=>{
+    markers[loc.id].setIcon(iconFor(loc));
+    markers[loc.id].setPopupContent(popupHtml(loc));
+  });
+  // list
+  const q = query.trim().toLowerCase();
+  const rows = LOCATIONS.filter(loc=>{
+    const done = !!placed[loc.id];
+    if(filter==="need" && done) return false;
+    if(filter==="placed" && !done) return false;
+    if(q && !loc.n.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  listEl.innerHTML = rows.length ? "" : `<div class="empty">No spots match.</div>`;
+  rows.forEach(loc=>{
+    const done = !!placed[loc.id];
+    const div = document.createElement("div");
+    div.className = "item"+(done?" placed":"");
+    div.innerHTML =
+      `<div class="cb"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg></div>`
+      + `<div class="body"><div class="name">${escapeHtml(loc.n)}</div>`
+      + (done ? `<div class="meta placed-by">Placed ✓</div>`
+              : (loc.note ? `<div class="meta">${escapeHtml(loc.note)}</div>`:``))
+      + `</div>`;
+    div.addEventListener("click", ()=>{
+      map.setView([loc.lat,loc.lng], Math.max(map.getZoom(),16));
+      markers[loc.id].openPopup();
+      if(window.innerWidth<=760) document.getElementById("panel").classList.remove("open");
+    });
+    // checkbox toggles directly
+    div.querySelector(".cb").addEventListener("click", ev=>{ ev.stopPropagation(); toggle(loc.id); });
+    listEl.appendChild(div);
+  });
+  // progress
+  const total = LOCATIONS.length;
+  const doneCount = LOCATIONS.filter(l=>placed[l.id]).length;
+  document.getElementById("progressFill").style.width = (total? (doneCount/total*100):0)+"%";
+  document.getElementById("progressLabel").textContent = doneCount+" / "+total;
+}
+
+/* controls */
+document.getElementById("search").addEventListener("input", e=>{ query=e.target.value; render(); });
+document.querySelectorAll(".chip").forEach(c=>c.addEventListener("click", ()=>{
+  document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
+  c.classList.add("active"); filter=c.dataset.filter; render();
+}));
+document.getElementById("mobileToggle").addEventListener("click", ()=>{
+  document.getElementById("panel").classList.toggle("open");
+});
+
+/* ---- 6. Boot ------------------------------------------------------ */
+function boot(){
+  if(usingFirebase()){
+    try{
+      firebase.initializeApp(FIREBASE_CONFIG);
+      db = firebase.firestore();
+      backend = "firebase";
+      setStatus();
+      db.collection("signs").onSnapshot(snap=>{
+        for(const k in placed) delete placed[k];
+        snap.forEach(doc=>{ if(doc.data().placed) placed[doc.id]=true; });
+        render();
+      }, err=>{
+        console.error("Firestore error, falling back to local:", err);
+        backend="local"; setStatus(); loadLocal(); render();
+      });
+      return;
+    }catch(e){ console.error("Firebase init failed:", e); }
+  }
+  backend="local"; setStatus(); loadLocal(); render();
+}
+boot();
+</script>
+</body>
+</html>
