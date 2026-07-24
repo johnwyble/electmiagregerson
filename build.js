@@ -39,6 +39,16 @@ async function build() {
     }
   }
 
+  // Copy static folders (e.g. the hidden /yardsign volunteer page) into dist
+  const staticDirs = ['yardsign'];
+  for (const dir of staticDirs) {
+    const srcDir = path.join(SRC, dir);
+    if (fs.existsSync(srcDir)) {
+      fs.cpSync(srcDir, path.join(DIST, dir), { recursive: true });
+      console.log(`  Copied ${dir}/`);
+    }
+  }
+
   if (!fs.existsSync(IMG_SRC)) {
     console.log('\n  No images/ folder found. Skipping image optimization.');
     console.log('\nBuild complete.');
