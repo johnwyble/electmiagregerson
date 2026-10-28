@@ -40,7 +40,7 @@ async function build() {
   }
 
   // Copy static folders (e.g. the hidden /yardsign volunteer page) into dist
-  const staticDirs = ['yardsign'];
+  const staticDirs = ['yardsign', '1'];
   for (const dir of staticDirs) {
     const srcDir = path.join(SRC, dir);
     if (fs.existsSync(srcDir)) {
